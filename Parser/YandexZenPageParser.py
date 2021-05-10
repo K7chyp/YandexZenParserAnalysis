@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 import os
 
 
-class YandexZenPageParser:
-    def __init__(self, url):
+class YandexZenArticleNamesParser:
+    def __init__(self, url) -> None:
         self.url = url
         self.browser = webdriver.Chrome(
             str(os.path.dirname(os.path.realpath(__file__)))
@@ -16,11 +16,11 @@ class YandexZenPageParser:
         self.get_page_info()
         self.browser.close()
 
-    def get_html(self) -> str:
+    def get_html(self) -> None:
         self.browser.get(self.url)
         self.html = self.browser.page_source
 
-    def get_page_info(self):
+    def get_page_info(self) -> None:
         self.page = self.soup.find_all("div", {"class": "card-image-2-view__content"})
         self.articles = {
             article.text: article.find('a').get("href")

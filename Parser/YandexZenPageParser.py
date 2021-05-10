@@ -18,11 +18,11 @@ class YandexZenArticleNamesParser:
 
     def get_html(self) -> None:
         self.browser.get(self.url)
-        self.html = self.browser.page_source
+        self.html: list = self.browser.page_source
 
     def get_page_info(self) -> None:
         self.page = self.soup.find_all("div", {"class": "card-image-2-view__content"})
-        self.articles = {
+        self.articles: dict = {
             article.text: article.find('a').get("href")
             for article in self.page
             if article.text != " "

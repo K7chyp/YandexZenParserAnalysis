@@ -7,7 +7,7 @@ class YandexZenPageParser:
     def __init__(self, url):
         self.url = url
         self.browser = webdriver.Chrome(
-            "/home/nikita/Desktop/YandexZenParserAnalysis/Parser/SileniumFiles/chromedriver"
+            "./SileniumFiles/chromedriver"
         )
         self.get_html()
         self.soup = BeautifulSoup(self.html, "lxml")

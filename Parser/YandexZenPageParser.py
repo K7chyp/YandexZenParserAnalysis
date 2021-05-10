@@ -1,13 +1,15 @@
 from selenium import webdriver
 from requests import get
 from bs4 import BeautifulSoup
+import os
 
 
 class YandexZenPageParser:
     def __init__(self, url):
         self.url = url
         self.browser = webdriver.Chrome(
-            "./SileniumFiles/chromedriver"
+            str(os.path.dirname(os.path.realpath(__file__)))
+            + "/SileniumFiles/chromedriver"
         )
         self.get_html()
         self.soup = BeautifulSoup(self.html, "lxml")

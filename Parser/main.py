@@ -1,8 +1,9 @@
 from YandexZenPageParser import YandexZenPageParser
 
-def main():
-    print(YandexZenPageParser('https://zen.yandex.ru/').articles)
 
-    
+def main():
+    YandexZenPageParser("https://zen.yandex.ru/")
+
+
 if __name__ == "__main__":
     main()

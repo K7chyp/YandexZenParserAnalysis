@@ -21,9 +21,10 @@ class YandexZenPageParser:
         self.html = self.browser.page_source
 
     def get_page_info(self):
-        self.page = self.soup.find("div", {"class": "card-image-2-view__content"})
+        self.page = self.soup.find_all("div", {"class": "card-image-2-view__content"})
         self.articles = {
-            article.text: article.get("href")
-            for article in self.page.find_all("a")
-            if article.text != ""
+            article.text: article.find('a').get("href")
+            for article in self.page
+            if article.text != " "
         }
+        

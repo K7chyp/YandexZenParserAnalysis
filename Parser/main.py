@@ -13,6 +13,8 @@ def main():
         ).articles
         utility_output: dict = output.copy()
         output: dict = {**utility_output, **utility_parsed_page}
+    return output
+
 
 if __name__ == "__main__":
-   main()
+    print(main())

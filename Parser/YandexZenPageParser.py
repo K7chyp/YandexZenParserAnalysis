@@ -22,7 +22,6 @@ class BaseClassYandexParser:
 class YandexZenArticleNamesParser(BaseClassYandexParser):
     def __init__(self, url) -> None:
         super().__init__(url)
-        self.get_html()
         self.get_info_about_articles()
         self.browser.close()
 
@@ -39,7 +38,6 @@ class YandexZenPageContentParser(BaseClassYandexParser):
     def __init__(self, url):
         super.__init__(url)
         self.url_checker()
-        self.get_html()
         self.browser.close()
 
     def url_checker(self):

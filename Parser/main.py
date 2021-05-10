@@ -1,4 +1,5 @@
 from YandexZenPageParser import YandexZenArticleNamesParser
+from YandexZenPageParser import YandexZenPageContentParser
 from tqdm import trange
 
 ITERATIONS_COUNT = int(input("How many times do you want to parse it? "))

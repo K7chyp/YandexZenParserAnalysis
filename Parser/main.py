@@ -2,7 +2,7 @@ from YandexZenPageParser import YandexZenPageParser
 
 
 def main():
-    YandexZenPageParser("https://zen.yandex.ru/")
+    print(YandexZenPageParser("https://zen.yandex.ru/").articles)
 
 
 if __name__ == "__main__":

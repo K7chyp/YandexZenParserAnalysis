@@ -14,6 +14,5 @@ def main():
         utility_output: dict = output.copy()
         output: dict = {**utility_output, **utility_parsed_page}
 
-
 if __name__ == "__main__":
-    main()
+   main()

@@ -1,12 +1,11 @@
-from yandex_zen_page_parser import YandexZenPageContentParser
-from tqdm import trange
+from hifi_parser import HiFiPageParser
 
 
 def main():
-    YandexZenPageContentParser(
-        "https://pythonru.com/uroki/35-instrukcija-assert-dlja-nachinajushhih"
-    ).publish_date
-
+    print(HiFiPageParser(
+        "https://www.hi-fi.ru/magazine/kino/8-nastolko-strashnykh-uzh/?utm_referrer=https%3A%2F%2Fzen.yandex.com"
+    ).text_from_page
+)
 
 if __name__ == "__main__":
     main()

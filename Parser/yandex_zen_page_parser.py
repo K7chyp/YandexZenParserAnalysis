@@ -1,14 +1,15 @@
 import os
+from typing import final
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
 
-DIV = "div"
-CLASS = "class"
-SPAN = "span"
+DIV: str = "div"
+CLASS: str = "class"
+SPAN: str = "span"
 
 
-class BaseClassYandexParser:
+class BaseClassPageParser:
     def __init__(self, url):
         self.url = url
         self.browser = webdriver.Chrome(
@@ -22,8 +23,8 @@ class BaseClassYandexParser:
         self.browser.get(self.url)
         self.html: list = self.browser.page_source
 
-
-class YandexZenArticleNamesParser(BaseClassYandexParser):
+@final
+class YandexZenArticleNamesParser(BaseClassPageParser):
     def __init__(self, url) -> None:
         super().__init__(url)
         self.get_info_about_articles()
@@ -37,8 +38,8 @@ class YandexZenArticleNamesParser(BaseClassYandexParser):
             if article.text != " "
         }
 
-
-class YandexZenPageContentParser(BaseClassYandexParser):
+@final
+class YandexZenPageContentParser(BaseClassPageParser):
     def __init__(self, url):
         super().__init__(url)
         self.url_checker()

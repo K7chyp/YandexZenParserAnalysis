@@ -39,6 +39,7 @@ class YandexZenPageContentParser(BaseClassYandexParser):
         super().__init__(url)
         self.url_checker()
         self.get_text_from_yandex_zen_page()
+        self.get_page_stats()
         self.browser.close()
 
     def url_checker(self):
@@ -48,7 +49,36 @@ class YandexZenPageContentParser(BaseClassYandexParser):
 
     def get_text_from_yandex_zen_page(self):
         if self.is_it_yandex_zen_page:
-            self.page = self.soup.find_all(
+            self.page_with_text = self.soup.find_all(
                 "p", {"class": "article-render__block article-render__block_unstyled"}
             )
-            self.text = ''.join([part.text for part in self.page])
+            self.text = "".join(
+                [
+                    part_of_this_article.text
+                    for part_of_this_article in self.page_with_text
+                ]
+            )
+
+    def get_page_stats(self):
+        if self.is_it_yandex_zen_page:
+            self.stats_for_page = self.soup.find(
+                "span",
+                {
+                    "class": "ui-lib-likes-count__count _size_m _color_black _position_bottom"
+                },
+            ).text
+            self.discuss = self.soup.find(
+                "div", {"class": "ui-lib-comments-icon__bubble"}
+            ).text
+            self.page_stats = [
+                stats_name.text
+                for stats_name in self.soup.find_all(
+                    "span", {"class": "article-stats-view-redesign__stats-item-count"}
+                )
+            ]
+            self.publish_date = self.soup.find(
+                "div", {"class": "article-stats-view-redesign__item"}
+            ).text
+            self.story_views = self.soup.find(
+                "div", {"class": "article-stat-tip__item"}
+            ).text

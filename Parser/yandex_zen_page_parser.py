@@ -9,8 +9,8 @@ SPAN: str = "span"
 
 @final
 class YandexZenArticleNamesParser(BaseClassPageSettings):
-    def __init__(self, url) -> None:
-        super().__init__(url)
+    def __init__(self) -> None:
+        super().__init__("https://zen.yandex.ru/")
         self.get_info_about_articles()
         self.browser.close()
 
@@ -40,7 +40,7 @@ class YandexZenPageContentParser(BaseClassPageSettings):
         self.page_with_text = self.soup.find_all(
             "p", {CLASS: "article-render__block article-render__block_unstyled"}
         )
-        self.text = "".join(
+        self.text_from_page = "".join(
             [part_of_this_article.text for part_of_this_article in self.page_with_text]
         )
 
@@ -62,7 +62,7 @@ class YandexZenPageContentParser(BaseClassPageSettings):
         self.story_views: str = self.soup.find(
             DIV, {CLASS: "article-stat-tip__item"}
         ).text
-        self.author_page: str = self.soup.find(
+        self.author: str = self.soup.find(
             "a",
             {
                 CLASS: "publisher-controls__channel-name publisher-controls__channel-name_desktop"

@@ -15,5 +15,5 @@ class HiFiPageParser(BaseClassParser):
             content.text.replace("\n", "").replace("\t", "")
             for content in self.soup.find_all("div", {"class": "autor"})
         ]
-        self.article_author = self.page_content[0]
+        self.author_name = self.page_content[0]
         self.publish_date = self.page_content[1]

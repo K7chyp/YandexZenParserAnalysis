@@ -1,10 +1,24 @@
-from izvestia_parser import IzvestiaParser
+from yandex_zen_page_parser import YandexZenArticleNamesParser
+from choose_way_of_parsing import get_parsed_info
+from sub_functions import dict_preprocessing
+from time import sleep
+from tqdm import tqdm
+
+TIMES_YOU_WANT_TO_PARSE: int = int(input("How many iterations do you want to parse? "))
 
 
 def main():
-    print(IzvestiaParser(
-    "https://iz.ru/1151401/veronika-kulakova/odni-v-pole-rossiiskie-agrarii-tak-i-ne-dozhdalis-migrantov?utm_referrer=https%3A%2F%2Fzen.yandex.com"
-    ).author_name)
+    output: dict = {}
+    parsed_pages: dict = {}
+    for _ in range(TIMES_YOU_WANT_TO_PARSE):
+        output = dict_preprocessing(output, YandexZenArticleNamesParser().articles)
+        sleep(1)
+    for short_article_name, url in output.items():
+        parsed_pages: dict = dict_preprocessing(
+            {short_article_name: get_parsed_info(url)}, parsed_pages
+        )
+    return parsed_pages
+
 
 if __name__ == "__main__":
     main()

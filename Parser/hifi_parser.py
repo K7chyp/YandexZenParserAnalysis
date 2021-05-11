@@ -1,10 +1,10 @@
 from typing import final
-from yandex_zen_page_parser import BaseClassPageParser
+from base_class_page_settings import BaseClassPageSettings
 from bs4 import BeautifulSoup
 
 
 @final
-class HiFiPageParser(BaseClassPageParser):
+class HiFiPageParser(BaseClassPageSettings):
     def __init__(self, url) -> None:
         super().__init__(url)
         self.get_content_from_page()

@@ -1,31 +1,14 @@
-import os
 from typing import final
-from selenium import webdriver
 from bs4 import BeautifulSoup
-
+from base_class_page_settings import BaseClassPageSettings
 
 DIV: str = "div"
 CLASS: str = "class"
 SPAN: str = "span"
 
 
-class BaseClassPageParser:
-    def __init__(self, url):
-        self.url = url
-        self.browser = webdriver.Chrome(
-            str(os.path.dirname(os.path.realpath(__file__)))
-            + "/SileniumFiles/chromedriver"
-        )
-        self.get_html()
-        self.soup = BeautifulSoup(self.html, "lxml")
-
-    def get_html(self) -> None:
-        self.browser.get(self.url)
-        self.html: list = self.browser.page_source
-
-
 @final
-class YandexZenArticleNamesParser(BaseClassPageParser):
+class YandexZenArticleNamesParser(BaseClassPageSettings):
     def __init__(self, url) -> None:
         super().__init__(url)
         self.get_info_about_articles()
@@ -41,7 +24,7 @@ class YandexZenArticleNamesParser(BaseClassPageParser):
 
 
 @final
-class YandexZenPageContentParser(BaseClassPageParser):
+class YandexZenPageContentParser(BaseClassPageSettings):
     def __init__(self, url):
         super().__init__(url)
         self.url_checker()

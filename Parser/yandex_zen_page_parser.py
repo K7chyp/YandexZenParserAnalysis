@@ -23,6 +23,7 @@ class BaseClassPageParser:
         self.browser.get(self.url)
         self.html: list = self.browser.page_source
 
+
 @final
 class YandexZenArticleNamesParser(BaseClassPageParser):
     def __init__(self, url) -> None:
@@ -37,6 +38,7 @@ class YandexZenArticleNamesParser(BaseClassPageParser):
             for article in self.page
             if article.text != " "
         }
+
 
 @final
 class YandexZenPageContentParser(BaseClassPageParser):
@@ -74,4 +76,15 @@ class YandexZenPageContentParser(BaseClassPageParser):
         self.publish_date = self.soup.find(
             DIV, {CLASS: "article-stats-view-redesign__item"}
         ).text
-        self.story_views = self.soup.find(DIV, {CLASS: "article-stat-tip__item"}).text
+        self.story_views: str = self.soup.find(
+            DIV, {CLASS: "article-stat-tip__item"}
+        ).text
+        self.author_page: str = self.soup.find(
+            "a",
+            {
+                CLASS: "publisher-controls__channel-name publisher-controls__channel-name_desktop"
+            },
+        ).text
+        self.author_stats: str = self.soup.find(
+            DIV, {CLASS: "publisher-controls__subtitle"}
+        ).text

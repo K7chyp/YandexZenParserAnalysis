@@ -1,10 +1,9 @@
-from hifi_parser import HiFiPageParser
+from yandex_zen_page_parser import YandexZenPageContentParser
 
 
 def main():
-    print(HiFiPageParser(
-        "https://www.hi-fi.ru/magazine/kino/8-nastolko-strashnykh-uzh/?utm_referrer=https%3A%2F%2Fzen.yandex.com"
-    ).raiting
+    print(YandexZenPageContentParser(
+        'https://zen.yandex.ru/media/100mln/kak-ne-stat-bogatym-imeia-vse-vozmojnosti-razbogatet-606a011ee0a09f1423579998' ).author_stats
 )
 
 if __name__ == "__main__":

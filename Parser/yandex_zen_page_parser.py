@@ -42,15 +42,15 @@ class YandexZenPageContentParser(BaseClassYandexParser):
     def __init__(self, url):
         super().__init__(url)
         self.url_checker()
-        self.set_text_from_yandex_zen_page()
-        self.set_page_stats()
+        self.update_text_from_yandex_zen_page()
+        self.update_page_stats()
         self.browser.close()
 
     def url_checker(self):
         self.is_it_yandex_zen_page: bool = "https://zen.yandex" in self.url
         assert self.is_it_yandex_zen_page is True, "It's not Yandex Zen Page"
 
-    def set_text_from_yandex_zen_page(self):
+    def update_text_from_yandex_zen_page(self):
         self.page_with_text = self.soup.find_all(
             "p", {CLASS: "article-render__block article-render__block_unstyled"}
         )
@@ -58,7 +58,7 @@ class YandexZenPageContentParser(BaseClassYandexParser):
             [part_of_this_article.text for part_of_this_article in self.page_with_text]
         )
 
-    def set_page_stats(self):
+    def update_page_stats(self):
         self.stats_for_page = self.soup.find(
             SPAN,
             {CLASS: "ui-lib-likes-count__count _size_m _color_black _position_bottom"},

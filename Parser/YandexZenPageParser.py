@@ -36,8 +36,9 @@ class YandexZenArticleNamesParser(BaseClassYandexParser):
 
 class YandexZenPageContentParser(BaseClassYandexParser):
     def __init__(self, url):
-        super.__init__(url)
+        super().__init__(url)
         self.url_checker()
+        self.get_text_from_yandex_zen_page()
         self.browser.close()
 
     def url_checker(self):
@@ -45,5 +46,9 @@ class YandexZenPageContentParser(BaseClassYandexParser):
             True if "https://zen.yandex" in self.url else False
         )
 
-    def get_text_from_yandex_zen_page(self): 
-        pass
+    def get_text_from_yandex_zen_page(self):
+        if self.is_it_yandex_zen_page:
+            self.page = self.soup.find_all(
+                "p", {"class": "article-render__block article-render__block_unstyled"}
+            )
+            self.text = ''.join([part.text for part in self.page])

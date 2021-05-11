@@ -45,10 +45,10 @@ class YandexZenPageContentParser(BaseClassPageSettings):
         )
 
     def update_page_stats(self):
-        self.stats_for_page = self.soup.find(
-            SPAN,
-            {CLASS: "ui-lib-likes-count__count _size_m _color_black _position_bottom"},
-        ).text
+        # self.stats_for_page = self.soup.find(
+        #     SPAN,
+        #     {CLASS: "ui-lib-likes-count__count _size_m _color_black _position_bottom"},
+        # ).text
         self.discuss = self.soup.find(DIV, {CLASS: "ui-lib-comments-icon__bubble"}).text
         self.page_stats = [
             stats_name.text

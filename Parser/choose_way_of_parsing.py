@@ -13,7 +13,8 @@ def choose_way_of_parsing(url: str):
         if value in url:
             return value
         else:
-            if BaseClassParser(url).text_from_page is not None:
-                return BaseClassParser(url).text_from_page
+            text: str = BaseClassParser(url).text_from_page
+            if text is not None:
+                return text
             else:
                 raise "NotImplementedYet"

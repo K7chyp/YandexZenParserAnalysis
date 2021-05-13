@@ -1,0 +1,8 @@
+pip
+pymystem3
+tqdm
+pandas
+seaborn
+scikit-learn
+gensim
+WordCloud

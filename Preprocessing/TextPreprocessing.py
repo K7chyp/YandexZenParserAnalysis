@@ -1,5 +1,6 @@
 from string import punctuation
 from re import sub
+from SubFunctions import get_list_of_stopwords
 
 
 class TextPreprocessing:
@@ -14,7 +15,8 @@ class TextPreprocessing:
         ]
         self.delete_useless_symbols()
         self.make_text_columns()
-        self.text_preprocessing()
+        self.delete_punctuation_and_make_words_lower()
+        self.delete_stopwords()
 
     def delete_useless_symbols(self):
         self.df.article = self.df.article.apply(lambda x: x.replace("\n", ""))
@@ -22,17 +24,25 @@ class TextPreprocessing:
     def make_text_columns(self):
         self.df["text"] = self.df.short_article_name + self.df.article
 
-    def text_preprocessing(self):
+    def delete_punctuation_and_make_words_lower(self):
         self.df["text"] = self.df.text.apply(
             lambda x: sub(
-                r"[0-9]+",
+                r"[0-9]+",  # clear all numbers
                 "",
                 "".join(
                     [
-                        word.lower()
+                        word.lower()  # Word -> word
                         for word in x
                         if word not in set(str(punctuation) + "«»—-")
-                    ]
+                    ]  # clear punctuation
                 ),
+            )
+        )
+
+    def delete_stopwords(self):
+        stopwords = get_list_of_stopwords()
+        self.df["text"] = self.df.text.apply(
+            lambda local_text: " ".join(
+                [word for word in local_text.split() if word not in stopwords]
             )
         )

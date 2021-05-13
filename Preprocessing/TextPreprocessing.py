@@ -48,6 +48,9 @@ class TextPreprocessing:
     def apply_lemmatization_for_text(self):
         m = Mystem()
         self.df["text"] = self.df.text.apply(lambda text: "".join(m.lemmatize(text)))
+    
+    def split_text_for_words(self): 
+        self.df['text_spit'] = self.df.text.apply(lambda text: text.split())
 
     def apply_preprocessing_for_text(self): 
         self.delete_useless_symbols()
@@ -55,3 +58,4 @@ class TextPreprocessing:
         self.delete_punctuation_and_make_words_lower()
         self.delete_stopwords()
         self.apply_lemmatization_for_text()
+        self.split_text_for_words()

@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 COUNT_OF_TOPICS = 5
-PATH_TO_IMAGE = ""
 
 
 class WordCloudModel:
@@ -38,16 +37,14 @@ class WordCloudModel:
         return topics
 
     def plotwordcloud(self, topic_number):
-        mask = np.array(Image.open(PATH_TO_IMAGE))
         topics = self.make_model()
         text = dict(topics[topic_number][1])
         wordcloud = WordCloud(
             background_color="white",
             max_words=100,
-            width=mask.shape[1],
-            height=mask.shape[0],
+            width=1000,
+            height=1000,
             collocations=False,
-            mask=mask,
         )
         wordcloud = wordcloud.generate_from_frequencies(text)
         plt.figure(figsize=(15, 10))

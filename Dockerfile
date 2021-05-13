@@ -6,3 +6,6 @@ RUN pip install --upgrade gensim
 RUN pip install --upgrade wordcloud
 RUN pip install --upgrade numpy
 RUN pip install --upgrade matplotlib
+RUN pip install --upgrade pandas
+RUN pip install --upgrade scipy
+RUN pip install --upgrade python-Levenshtein

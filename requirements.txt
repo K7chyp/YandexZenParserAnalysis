@@ -1,5 +1,3 @@
-pip
-pymystem3
 tqdm
 pandas
 seaborn

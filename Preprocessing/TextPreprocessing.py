@@ -1,5 +1,6 @@
 from string import punctuation
 from re import sub
+from pymystem3 import Mystem
 from SubFunctions import get_list_of_stopwords
 
 
@@ -13,10 +14,7 @@ class TextPreprocessing:
             "publish_date",
             "href",
         ]
-        self.delete_useless_symbols()
-        self.make_text_columns()
-        self.delete_punctuation_and_make_words_lower()
-        self.delete_stopwords()
+        self.apply_preprocessing_for_text()
 
     def delete_useless_symbols(self):
         self.df.article = self.df.article.apply(lambda x: x.replace("\n", ""))
@@ -46,3 +44,14 @@ class TextPreprocessing:
                 [word for word in local_text.split() if word not in stopwords]
             )
         )
+
+    def apply_lemmatization_for_text(self):
+        m = Mystem()
+        self.df["text"] = self.df.text.apply(lambda text: "".join(m.lemmatize(text)))
+
+    def apply_preprocessing_for_text(self): 
+        self.delete_useless_symbols()
+        self.make_text_columns()
+        self.delete_punctuation_and_make_words_lower()
+        self.delete_stopwords()
+        self.apply_lemmatization_for_text()
